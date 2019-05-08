@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ParticipantComponent } from './participant/participant.component';
+import { HomeComponent } from './home/home.component';
+import { CreatorComponent } from './creator/creator.component';
+import { RoomComponent } from './room/room.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: 'join', component: ParticipantComponent},
+  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'create', component: CreatorComponent},
+  {path: 'room/:name', component: RoomComponent},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

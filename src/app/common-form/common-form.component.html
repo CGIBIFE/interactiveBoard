@@ -1,0 +1,9 @@
+<form class="form-wrapper" [formGroup]="commonForm">
+    <ng-content select="h1"></ng-content>
+    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2" >
+      <input type="text" placeholder="Name" class="form-control input-spacing" formControlName="name" required>
+      <input type="text" placeholder="Channel Name" class="form-control input-spacing" formControlName="channel" required>
+      <button type="button"  class="btn btn-success col" [disabled]="!commonForm.valid" (click)="formSubmit()">{{buttonText}}</button>
+    </div>
+    <ng-content></ng-content>
+</form>
