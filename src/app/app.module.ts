@@ -11,6 +11,7 @@ import { LinkComponent } from './link/link.component';
 import { SocketService } from '../service/socket.client';
 import { CookieManager } from '../service/cookie.service';
 import { RoomComponent } from './room/room.component';
+import { RoomGuardClass } from './roomGuard.class';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,7 @@ import { RoomComponent } from './room/room.component';
         AppRoutingModule,
         ReactiveFormsModule
     ],
-  providers: [SocketService, CookieManager],
+  providers: [SocketService, CookieManager, RoomGuardClass],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

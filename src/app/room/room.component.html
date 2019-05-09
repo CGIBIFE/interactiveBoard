@@ -1,10 +1,10 @@
 <div class="container">
-<h1>Channel name: </h1>
-  <h4>{{room}}</h4>
+<h1>Channel name: {{room}}</h1>
   <div class="row">
+    <div class="quizBoard col-md-8 col-sm-8"></div>
     <div class="col-md-4" *ngIf="isAdmin">
       <h4>Participants</h4>
-
+        <li *ngFor="let user of users" class="userList">{{user.name}} - {{user.score}}</li>
     </div>
   </div>
 </div>

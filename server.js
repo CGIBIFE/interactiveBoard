@@ -18,7 +18,8 @@ io.on('connection',(socket) => {
     socket.on('join',(details) => {
         console.log(`user joined in Room: ${details.channel}`);
         socket.join(details.channel)
-        socket.emit('userJoined',details.name)
+        socket.to(details.channel).emit('userJoined',details.name)
+        //io.emit('userJoined',details.name)
     })
 
 })

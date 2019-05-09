@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 export class SocketService {
     private socket;
     constructor() {
-        this.socket = io('http://localhost:3000');
+        this.socket = io('ws://localhost:3000', {transports: ['websocket']});
     }
 
     public createRoom(name) {
