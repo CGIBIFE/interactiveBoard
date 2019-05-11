@@ -5,16 +5,16 @@ export class CookieManager {
     }
 
     public readCookie() {
-        return JSON.parse(document.cookie.split(';').find(cookie => cookie.includes('userDetails')))
+        return JSON.parse(sessionStorage.getItem('userInfo'));
     }
 
     public setCookie = cookieDetails => {
         // tslint:disable-next-line:max-line-length
-        document.cookie = `{"userDetails":{"name":"${cookieDetails.name}","room":"${cookieDetails.channel}","isAdmin":"${cookieDetails.isAdmin}"}}`;
+        sessionStorage.setItem('userInfo', `{"userDetails":{"name":"${cookieDetails.name}","room":"${cookieDetails.channel}","isAdmin":"${cookieDetails.isAdmin}"}}`);
     }
 
     public clearCookies = () => {
-        document.cookie = '';
+        sessionStorage.removeItem('userInfo');
     }
 
 }

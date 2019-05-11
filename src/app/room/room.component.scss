@@ -1,6 +1,9 @@
 h4{
   color: #fff;
 }
+.room-header{
+  margin-top: 1em;
+}
 .userList{
   color: #fff;
   font-size: medium;
@@ -9,6 +12,12 @@ h4{
   list-style: none;
 }
 .quizBoard{
-  border:thin solid #1bc98e;
-  height: 100vh;
+  min-height: 100vh;
+}
+.question{
+  margin: 2em 0;
+  .btn-primary{
+    color: #fff;
+    cursor: pointer;
+  }
 }

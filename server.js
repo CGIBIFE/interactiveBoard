@@ -9,18 +9,31 @@ app.get('/', function (req, res) {
 app.use(express.static(__dirname + '/dist/quizda/'));
 
 io.on('connection',(socket) => {
-    console.log('User Joined')
     socket.on('create', (room) => {
-        console.log(`created Room: ${room}`)
         socket.join(room)
     });
 
     socket.on('join',(details) => {
-        console.log(`user joined in Room: ${details.channel}`);
         socket.join(details.channel)
         socket.to(details.channel).emit('userJoined',details.name)
         //io.emit('userJoined',details.name)
     })
+
+    socket.on('adminLeft',(roomInfo) => {
+        socket.to(roomInfo.channel).emit('adminLeft')
+    })
+
+    socket.on('userLeft',(userInfo) => {
+        socket.to(userInfo.channel).emit('userLeft',userInfo)
+    })
+
+    socket.on('sendQuestion',(question) => {
+       socket.to(question.channel).emit('receiveQuestion', {question:question.question, answers:question.answer,id:question.id});
+    })
+    socket.on('submitAnswer',(answer) => {
+       socket.to(answer.channel).emit('checkAnswer', answer);
+    })
+
 
 })
 

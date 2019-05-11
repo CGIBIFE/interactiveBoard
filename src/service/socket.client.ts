@@ -23,4 +23,50 @@ export class SocketService {
         });
 
     }
+
+    public adminLeft(name) {
+        this.socket.emit('adminLeft', {channel: name});
+    }
+
+    public userLeft(userName, channel) {
+        console.log(`${userName} left from ${channel}`);
+        this.socket.emit('userLeft', {userName, channel});
+    }
+
+    public adminStatus() {
+        return Observable.create((observer) => {
+            this.socket.on('adminLeft', () => {
+                observer.next();
+            });
+        });
+    }
+    public userStatus() {
+        return Observable.create((observer) => {
+            this.socket.on('userLeft', (userInfo) => {
+                observer.next(userInfo);
+            });
+        });
+    }
+
+    public sendQuestion(channel, question, answer, id) {
+        this.socket.emit('sendQuestion', {channel, question, answer, id});
+    }
+
+    public getQuestion() {
+        return Observable.create((observer) => {
+            this.socket.on('receiveQuestion', (questionAnswers) => {
+                observer.next(questionAnswers);
+            });
+        });
+    }
+    public checkAnswer() {
+        return Observable.create((observer) => {
+            this.socket.on('checkAnswer', (answer) => {
+                observer.next(answer);
+            });
+        });
+    }
+    public submitAnswer(channel, answer, user, question) {
+        this.socket.emit('submitAnswer', {channel, answer, user, question});
+    }
 }
