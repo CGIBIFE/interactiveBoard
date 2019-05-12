@@ -41,6 +41,6 @@ io.on('connection',(socket) => {
 
 })
 
-http.listen(3000, function () {
+http.listen(process.env.PORT || 80, function () {
     console.log('Localhost:3000')
 })
