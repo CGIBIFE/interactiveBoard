@@ -9,6 +9,7 @@ app.get('/', function (req, res) {
 app.use(express.static(__dirname + '/dist/quizda/'));
 
 io.on('connection',(socket) => {
+    console.log("user joined");
     socket.on('create', (room) => {
         socket.join(room)
     });
