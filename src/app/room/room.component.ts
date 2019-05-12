@@ -14,7 +14,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     isAdmin: Boolean;
     users: any[] = [];
     userDetails: { name: string };
-    questions: object;
+    questions: any[];
     question: object;
     answered: boolean;
     channelEnded: boolean;
@@ -48,13 +48,15 @@ export class RoomComponent implements OnInit, OnDestroy {
         });
 
         this.socketService.checkAnswer().subscribe((answer) => {
-            // tslint:disable-next-line:max-line-length no-unused-expression
-            this.questions && this.questions.find(question => question.id === answer.question ).answer === answer.answer && this.users.find(user => user.name === answer.user).score ++;
+            // tslint:disable-next-line:no-unused-expression
+            this.questions && this.questions
+                .find(question => question.id === answer.question )
+                .answer === answer.answer && this.users.find(user => user.name === answer.user).score ++;
         });
 
         this.socketService.channelStatus().subscribe((users) => {
             this.channelEnded = true;
-     console.log(this.users.sort((a, b) => (a.score > b.score) ? 1 : -1 ))
+     console.log(this.users.sort((a, b) => (a.score > b.score) ? 1 : -1 ));
             this.isAdmin ? this.showScoreBoard = true : this.myScore = users.users.find(user => user.name === this.userDetails.name).score;
         });
 
