@@ -1,5 +1,5 @@
 import * as io from 'socket.io-client';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 
 export class SocketService {
     private socket;
@@ -68,5 +68,17 @@ export class SocketService {
     }
     public submitAnswer(channel, answer, user, question) {
         this.socket.emit('submitAnswer', {channel, answer, user, question});
+    }
+
+    public endChannel(channel, users) {
+        this.socket.emit('endChannel', {channel, users});
+    }
+
+    public channelStatus() {
+        return Observable.create((observer) => {
+            this.socket.on('channelEnded', (users) => {
+                observer.next(users);
+            });
+        });
     }
 }

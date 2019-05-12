@@ -16,6 +16,10 @@ export class RoomComponent implements OnInit, OnDestroy {
     userDetails: { name: string };
     questions: object;
     question: object;
+    answered: boolean;
+    channelEnded: boolean;
+    showScoreBoard: boolean;
+    myScore: string;
 
     // tslint:disable-next-line:max-line-length
     constructor(private route: ActivatedRoute, public socketService: SocketService, private cookieManager: CookieManager, private router: Router) {
@@ -39,13 +43,21 @@ export class RoomComponent implements OnInit, OnDestroy {
         });
 
         this.socketService.getQuestion().subscribe((question) => {
+            this.answered = false;
             this.question = question;
         });
 
         this.socketService.checkAnswer().subscribe((answer) => {
-            // tslint:disable-next-line:max-line-length
-           this.questions.find(question => question.id === answer.question ).answer === answer.answer && this.users.find(user => user.name === answer.user).score ++;
+            // tslint:disable-next-line:max-line-length no-unused-expression
+            this.questions && this.questions.find(question => question.id === answer.question ).answer === answer.answer && this.users.find(user => user.name === answer.user).score ++;
         });
+
+        this.socketService.channelStatus().subscribe((users) => {
+            this.channelEnded = true;
+     console.log(this.users.sort((a, b) => (a.score > b.score) ? 1 : -1 ))
+            this.isAdmin ? this.showScoreBoard = true : this.myScore = users.users.find(user => user.name === this.userDetails.name).score;
+        });
+
 
         this.userDetails = this.cookieManager.readCookie().userDetails;
         this.isAdmin = JSON.parse(this.cookieManager.readCookie().userDetails.isAdmin);
@@ -78,7 +90,13 @@ export class RoomComponent implements OnInit, OnDestroy {
     }
 
     submitAnswer(answer, question): void {
+        this.answered = true;
         this.socketService.submitAnswer(this.room, answer, this.userDetails.name, question );
+    }
+
+    endChannel(): void {
+        this.channelEnded = true;
+        this.socketService.endChannel(this.room, this.users);
     }
 
     ngOnDestroy(): void {

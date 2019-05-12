@@ -1,3 +1,6 @@
+.dark{
+  color: #252830;
+}
 h4{
   color: #fff;
 }
@@ -20,4 +23,13 @@ h4{
     color: #fff;
     cursor: pointer;
   }
+}
+
+.score{
+  padding: 1em;
+  background: #1bc98e;
+  border-radius: .5em;
+}
+.badge-primary {
+  background: #1bc98e;
 }

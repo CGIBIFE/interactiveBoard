@@ -33,6 +33,10 @@ io.on('connection',(socket) => {
     socket.on('submitAnswer',(answer) => {
        socket.to(answer.channel).emit('checkAnswer', answer);
     })
+    socket.on('endChannel',(room) => {
+        console.log(room.users)
+        socket.to(room.channel).emit('channelEnded', {users:room.users})
+    })
 
 
 })
