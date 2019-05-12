@@ -2,11 +2,11 @@
 
 This is a socket based quiz project
 
-## start server
+## Start server
 
 Run `npm start` to start client (angular) and Run `node server` to start socket server
 
-## Running app
+## Run app
 
 Open any browser and go to `localhost:4200`
 
