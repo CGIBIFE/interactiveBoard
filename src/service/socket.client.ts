@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 export class SocketService {
     private socket;
     constructor() {
-        this.socket = io('wss://localhost', {transports: ['websocket']});
+        const HOST = location.origin.replace(/^http/, 'ws')
+        this.socket = new WebSocket(HOST);
+       /* this.socket = io('wss://localhost', {transports: ['websocket']});*/
     }
 
     public createRoom(name) {
