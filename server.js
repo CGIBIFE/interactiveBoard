@@ -2,6 +2,7 @@ const app = require('express')();
 const express = require('express');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+io.set('transports', ['websocket']);
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/dist/quizda/index.html');
