@@ -2,7 +2,6 @@ const app = require('express')();
 const express = require('express');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-io.set('transports', ['websocket']);
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/dist/quizda/index.html');
@@ -10,7 +9,6 @@ app.get('/', function (req, res) {
 app.use(express.static(__dirname + '/dist/quizda/'));
 
 io.on('connection',(socket) => {
-    console.log("user joined");
     socket.on('create', (room) => {
         socket.join(room)
     });
@@ -43,6 +41,6 @@ io.on('connection',(socket) => {
 
 })
 
-http.listen(process.env.PORT || 80, function () {
+http.listen(3000, function () {
     console.log('Localhost:3000')
 })

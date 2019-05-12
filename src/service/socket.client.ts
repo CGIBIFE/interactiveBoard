@@ -1,10 +1,10 @@
 import * as io from 'socket.io-client';
-import { Observable } from 'rxjs';
+import {observable, Observable} from 'rxjs';
 
 export class SocketService {
     private socket;
     constructor() {
-       this.socket = io('ws://localhost', {transports: ['websocket']});
+        this.socket = io('ws://localhost:3000', {transports: ['websocket']});
     }
 
     public createRoom(name) {
