@@ -6,6 +6,7 @@ import { CreatorComponent } from './creator/creator.component';
 import { RoomComponent } from './room/room.component';
 import {RoomGuardClass} from './roomGuard.class';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {RetroComponent} from './retro/retro.component';
 
 const routes: Routes = [
   {path: 'join', component: ParticipantComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'create', component: CreatorComponent},
   {path: 'room/:name', component: RoomComponent, canDeactivate: [RoomGuardClass]},
+  {path: 'retro', component: RetroComponent, canDeactivate: [RoomGuardClass]},
 ];
 
 @NgModule({

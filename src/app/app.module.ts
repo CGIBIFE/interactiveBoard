@@ -13,6 +13,7 @@ import { CookieManager } from '../service/cookie.service';
 import { RoomComponent } from './room/room.component';
 import { RoomGuardClass } from './roomGuard.class';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RetroComponent } from './retro/retro.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CommonFormComponent,
     LinkComponent,
     RoomComponent,
-    DashboardComponent
+    DashboardComponent,
+    RetroComponent
   ],
     imports: [
         BrowserModule,
