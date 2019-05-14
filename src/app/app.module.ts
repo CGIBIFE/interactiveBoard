@@ -12,6 +12,7 @@ import { SocketService } from '../service/socket.client';
 import { CookieManager } from '../service/cookie.service';
 import { RoomComponent } from './room/room.component';
 import { RoomGuardClass } from './roomGuard.class';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { RoomGuardClass } from './roomGuard.class';
     CreatorComponent,
     CommonFormComponent,
     LinkComponent,
-    RoomComponent
+    RoomComponent,
+    DashboardComponent
   ],
     imports: [
         BrowserModule,
