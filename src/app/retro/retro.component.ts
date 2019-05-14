@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SocketService} from '../../service/socket.client';
 
 @Component({
   selector: 'app-retro',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RetroComponent implements OnInit {
 
-  constructor() { }
+  constructor(public socket: SocketService) { }
 
+  isAdmin: Boolean = false;
   columns: any[] = [];
   columnName: string;
+  channelName: string;
+  name: string;
   enableAdd = false;
+  connected: Boolean;
+
    ngOnInit() {
   }
   addColumn = (e) => {
@@ -21,6 +27,17 @@ export class RetroComponent implements OnInit {
   }
   showAddButton = () => {
      this.enableAdd = true;
+  }
+
+  create = () => {
+     this.socket.createRoom(this.channelName);
+     this.connected = true;
+     this.isAdmin = true;
+     sessionStorage.setItem('retroDetails', `{"channel": ${this.channelName}, "admin":true,"name":${this.name}`);
+  }
+
+  removeColumn = (name) => {
+    this.columns = this.columns.find(column => column !== name );
   }
 
 }

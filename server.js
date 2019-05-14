@@ -10,6 +10,7 @@ app.use(express.static(__dirname + '/dist/quizda/'));
 
 io.on('connection',(socket) => {
     socket.on('create', (room) => {
+        console.log(room)
         socket.join(room)
     });
 
