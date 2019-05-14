@@ -7,6 +7,14 @@
   .modal{
     display: block;
   }
+  .column{
+    width: 20%;
+    flex: 0 0 auto;
+    margin-right: 3px;
+    height: 100vh;
+    padding: 5px;
+    border: thin solid #1bc98e;
+  }
 }
 .scroll-wrapper {
   display: flex;

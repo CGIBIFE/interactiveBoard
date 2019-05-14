@@ -9,7 +9,18 @@ export class RetroComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  columns: any[] = [];
+  columnName: string;
+  enableAdd = false;
+   ngOnInit() {
+  }
+  addColumn = (e) => {
+     this.columns.push(e.target.value);
+    this.columnName = '';
+    this.enableAdd = false;
+  }
+  showAddButton = () => {
+     this.enableAdd = true;
   }
 
 }

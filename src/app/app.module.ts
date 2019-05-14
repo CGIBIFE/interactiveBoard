@@ -6,7 +6,7 @@ import { ParticipantComponent } from './participant/participant.component';
 import { HomeComponent } from './home/home.component';
 import { CreatorComponent } from './creator/creator.component';
 import { CommonFormComponent } from './common-form/common-form.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LinkComponent } from './link/link.component';
 import { SocketService } from '../service/socket.client';
 import { CookieManager } from '../service/cookie.service';
@@ -29,7 +29,8 @@ import { RetroComponent } from './retro/retro.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
   providers: [SocketService, CookieManager, RoomGuardClass],
   bootstrap: [AppComponent]
