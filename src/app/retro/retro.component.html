@@ -3,7 +3,8 @@
         <mat-card class="col-md-3 ml-2" *ngFor="let column of columns; index as i">
             <mat-card-header>
                 <!--  <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>-->
-                <span class="mat-display-1 title">{{column.name}}</span>
+                <span class="mat-display-1 title col">{{column.name}}</span>
+                <span matBadge="X" matBadgeOverlap="true" style=" margin-right: 10px;margin-top: 10px;display: block;width: 10px;height: 10px;cursor: pointer" (click)="removeColumn(column.name)"></span>
             </mat-card-header>
 
             <mat-card-content cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)" style="min-height: 15em;background: #8e8e8e1a;

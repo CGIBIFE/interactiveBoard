@@ -86,7 +86,7 @@ export class RetroComponent implements OnInit {
     }
 
     removeColumn = (name) => {
-        this.columns = this.columns.filter(column => column !== name);
+        this.columns = this.columns.filter(column => column.name !== name);
         this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 

@@ -15,7 +15,15 @@ import { RoomGuardClass } from './roomGuard.class';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RetroComponent } from './retro/retro.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {
+    MatBadgeModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule
+} from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
@@ -42,6 +50,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MatCardModule,
         MatDividerModule,
         DragDropModule,
+        MatBadgeModule,
     ],
   providers: [SocketService, CookieManager, RoomGuardClass],
   bootstrap: [AppComponent]
