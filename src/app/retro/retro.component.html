@@ -1,31 +1,35 @@
 <div class="retro-wrapper">
     <div class="scroll-wrapper" *ngIf="action === 'join'" cdkDropListGroup>
-        <mat-card class="col-md-2 ml-2" *ngFor="let column of columns; index as i">
+        <mat-card class="col-md-3 ml-2" *ngFor="let column of columns; index as i">
             <mat-card-header>
-              <!--  <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>-->
+                <!--  <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>-->
                 <span class="mat-display-1 title">{{column.name}}</span>
             </mat-card-header>
-            <mat-divider [inset]="true"></mat-divider>
-            <mat-card-content cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)" style="min-height: 5em;">
-                <span class="card mb-2 mt-2" *ngFor="let card of column.cards; index as i" cdkDrag id="{{column.name}}-card-{{i}}" [cdkDragData]="card">
-                <span class="card-body">
+
+            <mat-card-content cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)" style="min-height: 15em;background: #8e8e8e1a;
+    padding: 1em;
+    border-radius: 4px">
+                <mat-card class="col mb-2" *ngFor="let card of column.cards; index as i" cdkDrag
+                          id="{{column.name}}-card-{{i}}" [cdkDragData]="card">
+                    <mat-card-content>
                         {{card}}
-                </span>
-            </span>
+                    </mat-card-content>
+                </mat-card>
             </mat-card-content>
             <mat-card-footer>
                 <mat-form-field class="col" [formGroup]="createCardForm">
-                <textarea type="text"  matInput [(ngModel)]="card" (keyup.enter)="addCard(column.name)" *ngIf="showAddCard" formControlName="card"></textarea>
+                    <textarea type="text" matInput [(ngModel)]="card" (keyup.enter)="addCard(column.name)"
+                              *ngIf="showAddCard" formControlName="card"></textarea>
                 </mat-form-field>
             </mat-card-footer>
         </mat-card>
-        <mat-card class="col-md-2 ml-2" *ngIf="isAdmin" (click)="showAddButton()" >
-            <mat-form-field class="col" >
-            <input  matInput  placeholder="Column name" [(ngModel)]="columnName"  (keyup.enter)="addColumn($event)" >
+        <mat-card class="col-md-3 ml-2" *ngIf="isAdmin" (click)="showAddButton()">
+            <mat-form-field class="col">
+                <input matInput placeholder="Column name" [(ngModel)]="columnName" (keyup.enter)="addColumn($event)">
             </mat-form-field>
         </mat-card>
     </div>
-    <div class="modal"  *ngIf="action === 'create'">
+    <div class="modal" *ngIf="action === 'create'">
         <mat-card class="col-md-4 offset-4">
             <mat-card-header>
                 <mat-card-title>
@@ -33,12 +37,12 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content [formGroup]="createForm">
-            <mat-form-field class="col">
-                <input matInput placeholder="Retro Name" [(ngModel)]="channelName" formControlName="retroName">
-            </mat-form-field>
-            <mat-form-field class="col">
-                <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name">
-            </mat-form-field>
+                <mat-form-field class="col">
+                    <input matInput placeholder="Retro Name" [(ngModel)]="channelName" formControlName="retroName">
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name">
+                </mat-form-field>
             </mat-card-content>
             <mat-card-footer>
                 <button mat-button (click)="create()" class="col">Create</button>
