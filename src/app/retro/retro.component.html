@@ -1,60 +1,66 @@
 <div class="retro-wrapper">
-    <h1>Welcome to Retro Board</h1>
-    <div class="scroll-wrapper" *ngIf="action === 'join'">
-        <div *ngFor="let column of columns; index as i" class="column" (drop)="drop($event)" id="{{column.name}}-column-{{i}}" (dragover)="allDrop($event)">
-            <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>
-            <span class="title">{{column.name}}</span>
-            <span class="card mb-2 mt-2" *ngFor="let card of column.cards; index as i" draggable="true" id="{{column.name}}-card-{{i}}" (drag)="drag($event)">
+    <div class="scroll-wrapper" *ngIf="action === 'join'" cdkDropListGroup>
+        <mat-card class="col-md-2 ml-2" *ngFor="let column of columns; index as i">
+            <mat-card-header>
+              <!--  <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>-->
+                <span class="mat-display-1 title">{{column.name}}</span>
+            </mat-card-header>
+            <mat-divider [inset]="true"></mat-divider>
+            <mat-card-content cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)" style="min-height: 5em;">
+                <span class="card mb-2 mt-2" *ngFor="let card of column.cards; index as i" cdkDrag id="{{column.name}}-card-{{i}}" [cdkDragData]="card">
                 <span class="card-body">
                         {{card}}
                 </span>
             </span>
-            <div class="add-card">
-            <textarea type="text" class="form-control mb-2" placeholder="Column name" [(ngModel)]="card"
-                      (keyup.enter)="addCard(column.name)" *ngIf="showAddCard"></textarea>
-            </div>
-        </div>
-        <div class="column" (click)="showAddButton()" *ngIf="isAdmin">
-            <input type="text" class="form-control mb-2" placeholder="Column name" [(ngModel)]="columnName"
-                   (keyup.enter)="addColumn($event)" *ngIf="enableAdd">
-        </div>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-form-field class="col" [formGroup]="createCardForm">
+                <textarea type="text"  matInput [(ngModel)]="card" (keyup.enter)="addCard(column.name)" *ngIf="showAddCard" formControlName="card"></textarea>
+                </mat-form-field>
+            </mat-card-footer>
+        </mat-card>
+        <mat-card class="col-md-2 ml-2" *ngIf="isAdmin" (click)="showAddButton()" >
+            <mat-form-field class="col" >
+            <input  matInput  placeholder="Column name" [(ngModel)]="columnName"  (keyup.enter)="addColumn($event)" >
+            </mat-form-field>
+        </mat-card>
     </div>
-    <div class="modal-backdrop fade show" *ngIf="action === 'create'"></div>
-    <div class="modal" tabindex="-1" role="dialog" *ngIf="action === 'create'">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Board</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" placeholder="Retro Name" class="form-control mb-3" [(ngModel)]="channelName">
-                    <input type="text" placeholder="Name" class="form-control" [(ngModel)]="name">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary col" (click)="create()">Create</button>
-                </div>
-            </div>
-        </div>
+    <div class="modal"  *ngIf="action === 'create'">
+        <mat-card class="col-md-4 offset-4">
+            <mat-card-header>
+                <mat-card-title>
+                    Create Board
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content [formGroup]="createForm">
+            <mat-form-field class="col">
+                <input matInput placeholder="Retro Name" [(ngModel)]="channelName" formControlName="retroName">
+            </mat-form-field>
+            <mat-form-field class="col">
+                <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name">
+            </mat-form-field>
+            </mat-card-content>
+            <mat-card-footer>
+                <button mat-button (click)="create()" class="col">Create</button>
+            </mat-card-footer>
+        </mat-card>
     </div>
     <div class="modal" tabindex="-1" role="dialog" *ngIf="action === 'join' && channelName && !connected">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Join Board</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" placeholder="Name" class="form-control" [(ngModel)]="name">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary col" (click)="join()">Join</button>
-                </div>
-            </div>
-        </div>
+        <mat-card class="col-md-4 offset-4">
+            <mat-card-header>
+                <mat-card-title>
+                    Join Board
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content [formGroup]="joinForm">
+                <mat-form-field class="col">
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name">
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-footer>
+                <button mat-button (click)="join()" class="col">Join</button>
+            </mat-card-footer>
+        </mat-card>
+
     </div>
 </div>

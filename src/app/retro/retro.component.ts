@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SocketService} from '../../service/socket.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-retro',
@@ -22,6 +24,25 @@ export class RetroComponent implements OnInit {
     connected: Boolean;
     showAddCard: Boolean = true;
     action: string;
+   joinForm = new FormGroup({
+        name: new FormControl(),
+    });
+    createForm = new FormGroup({
+        retroName: new FormControl(),
+        name: new FormControl(),
+    });
+
+    createColumnForm = new FormGroup({
+        column: new FormControl(),
+    });
+
+    columnField = new FormControl('', [
+    ]);
+
+
+    createCardForm = new FormGroup({
+        card: new FormControl(),
+    });
 
     ngOnInit() {
         this.route.params.subscribe(params => {
@@ -75,28 +96,15 @@ export class RetroComponent implements OnInit {
         this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 
-    allDrop = (e) => {
-        e.preventDefault();
-    }
-
-    drop = (e) => {
-        e.preventDefault();
-        const data = e.dataTransfer.getData('text');
-        console.log('data' + data);
-        e.target.appendChild(document.getElementById(data));
-    }
-
-    drag = (e) => {
-        e.preventDefault();
-        console.log('id' + e.target.id);
-        this.showAddCard = false;
-        e.dataTransfer.setData('text', e.target.id);
-
-    }
-
-    dragOver = (e) => {
-        e.preventDefault();
-        this.showAddCard = true;
+    drop(event: CdkDragDrop<string[]>) {
+        if (event.previousContainer === event.container) {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+            transferArrayItem(event.previousContainer.data,
+                event.container.data,
+                event.previousIndex,
+                event.currentIndex);
+        }
     }
 
 }
