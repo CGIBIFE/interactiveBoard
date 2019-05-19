@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'create', component: CreatorComponent},
   {path: 'room/:name', component: RoomComponent, canDeactivate: [RoomGuardClass]},
-  {path: 'retro', component: RetroComponent, canDeactivate: [RoomGuardClass]},
+  {path: 'retro/:action', component: RetroComponent},
 ];
 
 @NgModule({

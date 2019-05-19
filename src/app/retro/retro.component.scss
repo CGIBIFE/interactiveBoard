@@ -1,9 +1,13 @@
 .retro-wrapper {
   width: 100%;
   min-height: 100vh;
-  background: aliceblue;
-  background: url("./asserts/imgs/stripes-light.png");
   padding:2vh;
+  .scroll-wrapper {
+    padding: 2em;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
   h2{
     margin: 0.5em 1em;
   }
@@ -47,10 +51,7 @@
   text-align: center;
   border-bottom: 1px solid #cdcdcd;
 }
-.scroll-wrapper {
-  padding: 2em;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-}
 
+.add-card{
+margin-top: 2em;
+}

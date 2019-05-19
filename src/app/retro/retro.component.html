@@ -1,17 +1,26 @@
 <div class="retro-wrapper">
-    <h2>Welcome to Retro Board</h2>
-    <div class="scroll-wrapper" *ngIf="connected">
-        <div *ngFor="let column of columns" class="column">
+    <h1>Welcome to Retro Board</h1>
+    <div class="scroll-wrapper" *ngIf="action === 'join'">
+        <div *ngFor="let column of columns; index as i" class="column" (drop)="drop($event)" id="{{column.name}}-column-{{i}}" (dragover)="allDrop($event)">
             <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>
-            <span class="title">{{column}}</span>
+            <span class="title">{{column.name}}</span>
+            <span class="card mb-2 mt-2" *ngFor="let card of column.cards; index as i" draggable="true" id="{{column.name}}-card-{{i}}" (drag)="drag($event)">
+                <span class="card-body">
+                        {{card}}
+                </span>
+            </span>
+            <div class="add-card">
+            <textarea type="text" class="form-control mb-2" placeholder="Column name" [(ngModel)]="card"
+                      (keyup.enter)="addCard(column.name)" *ngIf="showAddCard"></textarea>
+            </div>
         </div>
         <div class="column" (click)="showAddButton()" *ngIf="isAdmin">
             <input type="text" class="form-control mb-2" placeholder="Column name" [(ngModel)]="columnName"
                    (keyup.enter)="addColumn($event)" *ngIf="enableAdd">
         </div>
     </div>
-    <div class="modal-backdrop fade show" *ngIf="!connected"></div>
-    <div class="modal" tabindex="-1" role="dialog" *ngIf="!connected">
+    <div class="modal-backdrop fade show" *ngIf="action === 'create'"></div>
+    <div class="modal" tabindex="-1" role="dialog" *ngIf="action === 'create'">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -26,6 +35,24 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary col" (click)="create()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" *ngIf="action === 'join' && channelName && !connected">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Join Board</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="Name" class="form-control" [(ngModel)]="name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary col" (click)="join()">Join</button>
                 </div>
             </div>
         </div>

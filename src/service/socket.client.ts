@@ -15,6 +15,10 @@ export class SocketService {
         this.socket.emit('join', details);
     }
 
+    public getUpdate() {
+
+    }
+
     public userJoined() {
         return Observable.create((observer) => {
             this.socket.on('userJoined', (user) => {
@@ -80,5 +84,15 @@ export class SocketService {
                 observer.next(users);
             });
         });
+    }
+    public getBoardUpdate() {
+        return Observable.create((observer) => {
+            this.socket.on('getUpdate', (update) => {
+                observer.next(update);
+            });
+        });
+    }
+    public sendBoardStatus(columns, channel) {
+        this.socket.emit('sendUpdate', {columns, channel});
     }
 }

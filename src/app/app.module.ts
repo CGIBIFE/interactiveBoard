@@ -14,6 +14,8 @@ import { RoomComponent } from './room/room.component';
 import { RoomGuardClass } from './roomGuard.class';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RetroComponent } from './retro/retro.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,13 +26,15 @@ import { RetroComponent } from './retro/retro.component';
     LinkComponent,
     RoomComponent,
     DashboardComponent,
-    RetroComponent
+    RetroComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
     ],
   providers: [SocketService, CookieManager, RoomGuardClass],
   bootstrap: [AppComponent]

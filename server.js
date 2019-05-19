@@ -10,7 +10,6 @@ app.use(express.static(__dirname + '/dist/quizda/'));
 
 io.on('connection',(socket) => {
     socket.on('create', (room) => {
-        console.log(room)
         socket.join(room)
     });
 
@@ -39,6 +38,10 @@ io.on('connection',(socket) => {
         socket.to(room.channel).emit('channelEnded', {users:room.users})
     })
 
+    //
+    socket.on('sendUpdate',(update) => {
+        socket.to(update.channel).emit('getUpdate',update.columns)
+    })
 
 })
 
