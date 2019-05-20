@@ -1,18 +1,23 @@
 <div class="retro-wrapper" id="retroBoard">
-    <button class="btn btn-success pull-right" (click)="downloadCopy()">Download</button>
+    <button class="btn btn-success pull-right" (click)="downloadCopy()" *ngIf="connected && action === 'join'">
+        Download
+    </button>
     <div class="scroll-wrapper" *ngIf="action === 'join'" cdkDropListGroup>
         <mat-card class="col-md-3 ml-2" *ngFor="let column of columns; index as i">
             <mat-card-header>
                 <!--  <span class="remove" *ngIf="isAdmin" (click)="removeColumn(column)">X</span>-->
                 <span class="mat-display-1 title col">{{column.name}}</span>
-                <span matBadge="X" matBadgeOverlap="true" style=" margin-right: 10px;margin-top: 10px;display: block;width: 10px;height: 10px;cursor: pointer" (click)="removeColumn(column.name)"></span>
+                <span matBadge="X" matBadgeOverlap="true"
+                      style=" margin-right: 10px;margin-top: 10px;display: block;width: 10px;height: 10px;cursor: pointer"
+                      (click)="removeColumn(column.name)"></span>
             </mat-card-header>
 
-            <mat-card-content cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)" style="min-height: 15em;background: #8e8e8e1a;
-    padding: 1em;
-    border-radius: 4px">
-                <mat-card class="col mb-2" *ngFor="let card of column.cards; index as i" cdkDrag
-                          id="{{column.name}}-card-{{i}}" [cdkDragData]="card">
+            <mat-card-content cdkDropList [cdkDropListData]="column.cards" (cdkDropListDropped)="drop($event)" style="min-height: 15em;background: #8e8e8e1a;padding: 1em;border-radius: 4px">
+                <mat-card class="col mb-2" *ngFor="let card of column.cards; index as i" cdkDrag id="{{column.name}}-card-{{i}}" [cdkDragData]="card">
+                    <mat-card-header style="display: block;width: 100%;height: 15px;" *ngIf="card.by === name">
+                        <span matBadge="X" matBadgeOverlap="true"
+                              style="right: 0;float: right;display: block;width: 30px;height: 30px;cursor: pointer" (click)="removeCard(column.name, card.id)"></span>
+                    </mat-card-header>
                     <mat-card-content>
                         {{card.content}}
                     </mat-card-content>
@@ -23,7 +28,7 @@
             </mat-card-content>
             <mat-card-footer>
                 <mat-form-field class="col" [formGroup]="createCardForm">
-                    <textarea type="text" matInput [(ngModel)]="card" (keyup.enter)="addCard(column.name)"
+                    <textarea type="text" matInput (keyup.enter)="addCard(column.name, $event)"
                               *ngIf="showAddCard" formControlName="card"></textarea>
                 </mat-form-field>
             </mat-card-footer>

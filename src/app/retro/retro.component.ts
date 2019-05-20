@@ -92,9 +92,9 @@ export class RetroComponent implements OnInit {
         this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 
-    addCard = (column) => {
-        this.columns.find(col => col.name === column && col.cards.push({content: this.card, by: this.name}));
-        this.card = '';
+    addCard = (column, e) => {
+        this.columns.find(col => col.name === column && col.cards.push({content: e.target.value, by: this.name, id: Math.random()}));
+        this.createCardForm.reset();
         this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 
@@ -112,10 +112,16 @@ export class RetroComponent implements OnInit {
 
     downloadCopy = () => {
         toPng(document.getElementById('retroBoard'))
-            .then(function (dataUrl) {
-                download(dataUrl, 'my-node.png');
+            .then( (dataUrl) => {
+                download(dataUrl, this.channelName);
             });
 
+    }
+
+    removeCard = (columnName, id) => {
+        // tslint:disable-next-line:max-line-length
+        this.columns.find(column => column.name === columnName).cards = this.columns.find(column => column.name === columnName).cards.filter(card => card.id !== id)
+       this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 }
 
