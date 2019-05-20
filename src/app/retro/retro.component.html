@@ -14,8 +14,11 @@
                 <mat-card class="col mb-2" *ngFor="let card of column.cards; index as i" cdkDrag
                           id="{{column.name}}-card-{{i}}" [cdkDragData]="card">
                     <mat-card-content>
-                        {{card}}
+                        {{card.content}}
                     </mat-card-content>
+                    <mat-card-footer class="added-by">
+                        {{card.by}}
+                    </mat-card-footer>
                 </mat-card>
             </mat-card-content>
             <mat-card-footer>

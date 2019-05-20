@@ -93,7 +93,7 @@ export class RetroComponent implements OnInit {
     }
 
     addCard = (column) => {
-        this.columns.find(col => col.name === column && col.cards.push(this.card));
+        this.columns.find(col => col.name === column && col.cards.push({content: this.card, by: this.name}));
         this.card = '';
         this.socket.sendBoardStatus(this.columns, this.channelName);
     }
