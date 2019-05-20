@@ -105,6 +105,7 @@ export class RetroComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex);
         }
+        this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 
 }
