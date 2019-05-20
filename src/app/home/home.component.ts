@@ -12,8 +12,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-  goto = (location) => {
-    this.router.navigate([location]);
-  }
 
 }

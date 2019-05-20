@@ -4,7 +4,7 @@ import {observable, Observable} from 'rxjs';
 export class SocketService {
     private socket;
     constructor() {
-        this.socket = io('ws://localhost:3000', {transports: ['websocket']});
+        this.socket = io('http://localhost:3000', {transports: ['websocket']});
     }
 
     public createRoom(name) {
@@ -13,6 +13,10 @@ export class SocketService {
 
     public joinRoom(details) {
         this.socket.emit('join', details);
+    }
+
+    public getUpdate() {
+
     }
 
     public userJoined() {
@@ -80,5 +84,15 @@ export class SocketService {
                 observer.next(users);
             });
         });
+    }
+    public getBoardUpdate() {
+        return Observable.create((observer) => {
+            this.socket.on('getUpdate', (update) => {
+                observer.next(update);
+            });
+        });
+    }
+    public sendBoardStatus(columns, channel) {
+        this.socket.emit('sendUpdate', {columns, channel});
     }
 }

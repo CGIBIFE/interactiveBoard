@@ -1,0 +1,61 @@
+.retro-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding:2vh;
+  .scroll-wrapper {
+    padding: 2em;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  h2{
+    margin: 0.5em 1em;
+  }
+  .modal{
+    display: block;
+  }
+  .column{
+    background: white;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    width: 20%;
+    flex: 0 0 auto;
+    margin-right: 15px;
+    min-height: 90vh;
+    padding: 5px;
+    border: thin solid #cdcdcd;
+
+    .form-control{
+      font-size: 1.5em;
+    }
+    ::placeholder{ /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #8c8c8c;
+      opacity: 0.5; /* Firefox */
+    }
+
+  }
+  .modal{
+    margin-top: 10vh;
+  }
+  .remove{
+    float: right;
+    color: #8a8080;
+    cursor: pointer;
+  }
+}
+.title{
+margin: 0.5em;
+  text-align: center;
+}
+
+.add-card{
+margin-top: 2em;
+}
+
+.added-by{
+  padding: 10px;
+  text-align: right;
+  color: rgba(74, 74, 74, 1);
+  background: #f1f1f1;
+  border-top: thin solid #cdcdcd;
+}

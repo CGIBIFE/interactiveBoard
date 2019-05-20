@@ -38,6 +38,10 @@ io.on('connection',(socket) => {
         socket.to(room.channel).emit('channelEnded', {users:room.users})
     })
 
+    //
+    socket.on('sendUpdate',(update) => {
+        socket.to(update.channel).emit('getUpdate',update.columns)
+    })
 
 })
 

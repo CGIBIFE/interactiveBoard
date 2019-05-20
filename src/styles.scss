@@ -2,6 +2,7 @@
 @import "~node_modules/bootstrap/scss/bootstrap";
 @import "~node_modules/bootstrap/scss/bootstrap-grid";
 @import "~node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body{
   padding: 0;
@@ -15,4 +16,10 @@ body{
     color: #1BC98E;
     cursor: pointer;
   }
+  .align-vertical-center {
+    margin: 20vh auto;
+  }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
