@@ -35,14 +35,6 @@ export class RetroComponent implements OnInit {
         name: new FormControl(),
     });
 
-    createColumnForm = new FormGroup({
-        column: new FormControl(),
-    });
-
-    columnField = new FormControl('', [
-    ]);
-
-
     createCardForm = new FormGroup({
         card: new FormControl(),
     });
@@ -120,7 +112,7 @@ export class RetroComponent implements OnInit {
 
     removeCard = (columnName, id) => {
         // tslint:disable-next-line:max-line-length
-        this.columns.find(column => column.name === columnName).cards = this.columns.find(column => column.name === columnName).cards.filter(card => card.id !== id)
+        this.columns.find(column => column.name === columnName).cards = this.columns.find(column => column.name === columnName).cards.filter(card => card.id !== id);
        this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 }
