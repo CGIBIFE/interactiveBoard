@@ -1,4 +1,5 @@
-<div class="retro-wrapper">
+<div class="retro-wrapper" id="retroBoard">
+    <button class="btn btn-success pull-right" (click)="downloadCopy()">Download</button>
     <div class="scroll-wrapper" *ngIf="action === 'join'" cdkDropListGroup>
         <mat-card class="col-md-3 ml-2" *ngFor="let column of columns; index as i">
             <mat-card-header>

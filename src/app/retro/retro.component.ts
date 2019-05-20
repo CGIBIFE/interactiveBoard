@@ -3,12 +3,15 @@ import {SocketService} from '../../service/socket.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {FormControl, FormGroup} from '@angular/forms';
+import {toPng} from 'html-to-image';
+import download from 'downloadjs';
 
 @Component({
     selector: 'app-retro',
     templateUrl: './retro.component.html',
     styleUrls: ['./retro.component.scss']
 })
+
 export class RetroComponent implements OnInit {
 
     constructor(public socket: SocketService, public router: Router, private route: ActivatedRoute) {
@@ -57,7 +60,6 @@ export class RetroComponent implements OnInit {
         this.socket.getBoardUpdate().subscribe(update => {
             this.columns = update;
         });
-
     }
 
     addColumn = (e) => {
@@ -108,4 +110,12 @@ export class RetroComponent implements OnInit {
         this.socket.sendBoardStatus(this.columns, this.channelName);
     }
 
+    downloadCopy = () => {
+        toPng(document.getElementById('retroBoard'))
+            .then(function (dataUrl) {
+                download(dataUrl, 'my-node.png');
+            });
+
+    }
 }
+
